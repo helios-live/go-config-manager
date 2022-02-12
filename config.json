@@ -1,0 +1,8 @@
+{
+	"AuthToken": "testtoken",
+	"Custom": "My Option",
+	"MyCustomBool": false,
+	"Subkey": {
+		"Opt": 123
+	}
+}
