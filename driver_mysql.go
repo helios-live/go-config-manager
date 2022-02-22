@@ -11,7 +11,7 @@ func init() {
 	addPlugin("mysql", loadMySQL)
 }
 
-func loadMySQL(Config ConfigurationInterface) syncFunc {
+func loadMySQL(Config ConfigurationInterface) SyncFuncDef {
 	log.Fatalln("Not yet implemented")
 
 	return syncMySQL

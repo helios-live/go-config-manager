@@ -13,7 +13,7 @@ func init() {
 	addPlugin("jsonc", loadJsonc)
 }
 
-func loadJsonc(Config ConfigurationInterface) syncFunc {
+func loadJsonc(Config ConfigurationInterface) SyncFuncDef {
 	// log.Fatalln("Not yet implemented")
 
 	jsonFile, err := os.Open(jsonGetPath(Config))

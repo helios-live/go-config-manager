@@ -26,11 +26,11 @@ type ConfigurationInterface interface {
 	// Sync is called to sync changes
 	Sync()
 
-	// SyncFunc gets and sets the syncFunc
-	// SyncFunc(syncFunc) sets it
+	// SyncFunc gets and sets the SyncFuncDef
+	// SyncFunc(SyncFuncDef) sets it
 	// SyncFunc(nil) loads it
 	// the function that is called when you call Sync on the configuration
-	SyncFunc(syncFunc) syncFunc
+	SyncFunc(SyncFuncDef) SyncFuncDef
 
 	// GetParent
 	GetParent() *Configuration
@@ -51,7 +51,7 @@ type Configuration struct {
 	// for MySql it'll be the table name
 	Item string
 
-	syncFunc syncFunc
+	syncFunc SyncFuncDef
 }
 
 // NewConfig returns a pointer to a filled new instance of Configuration
@@ -66,7 +66,7 @@ func NewConfig(file string) *Configuration {
 }
 
 // SyncFunc return the root authToken
-func (c *Configuration) SyncFunc(sf syncFunc) syncFunc {
+func (c *Configuration) SyncFunc(sf SyncFuncDef) SyncFuncDef {
 	if sf != nil {
 		c.syncFunc = sf
 	}

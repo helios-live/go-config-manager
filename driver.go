@@ -7,8 +7,11 @@ import (
 	"github.com/fatih/color"
 )
 
-type plugin func(Config ConfigurationInterface) syncFunc
-type syncFunc func(Config ConfigurationInterface) error
+type plugin func(Config ConfigurationInterface) SyncFuncDef
+
+// SyncFuncDef is the func definition of the functions that
+// load&save the configuration
+type SyncFuncDef func(Config ConfigurationInterface) error
 
 // Driver is the current driver used to store the configs
 var Driver = flag.String("gcm-driver", "jsonc", "The apiconfig source to use")

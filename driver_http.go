@@ -20,7 +20,7 @@ func init() {
 	addPlugin("http", loadHTTP)
 }
 
-func loadHTTP(Config ConfigurationInterface) syncFunc {
+func loadHTTP(Config ConfigurationInterface) SyncFuncDef {
 
 	resp, err := httpNewRequest("GET", fmt.Sprintf("Group=%s&Item=%s", Config.GetParent().Group, Config.GetParent().Item), nil)
 	if err != nil {
