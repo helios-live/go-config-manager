@@ -3,6 +3,7 @@ package apiconfig
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -15,6 +16,10 @@ import (
 // var dsn = flag.String("mysql-dsn", "", "The mysql Data Source Name. I.e. user:password@tcp(your-amazonaws-uri.com:3306)/dbname")
 var httpSource = flag.String("gcm-http-ds", "", "The HTTP source to get and save the config from")
 var httpToken = flag.String("gcm-http-auth", "", "The HTTP Authorization: Bearer Token Header")
+
+type httpResponse struct {
+	Status string
+}
 
 func init() {
 	addPlugin("http", loadHTTP)
@@ -31,7 +36,7 @@ func loadHTTP(Config ConfigurationInterface) SyncFuncDef {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	log.Println(string(bytes))
+
 	err = json.Unmarshal(bytes, &Config)
 	if err != nil {
 		log.Fatalln(err)
@@ -56,9 +61,17 @@ func syncHTTP(Config ConfigurationInterface) error {
 		log.Fatalln(err)
 	}
 
-	log.Println(string(bytes))
+	respStatus := &httpResponse{}
+	err = json.Unmarshal(bytes, &respStatus)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-	return nil
+	if respStatus.Status == "successful" {
+		return nil
+	}
+
+	return errors.New(respStatus.Status)
 }
 
 // credit: https://stackoverflow.com/questions/51452148/how-can-i-make-a-request-with-a-bearer-token-in-go
