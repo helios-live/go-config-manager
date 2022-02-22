@@ -28,7 +28,7 @@ type ConfigurationInterface interface {
 
 	// SyncFunc gets and sets the syncFunc
 	// SyncFunc(syncFunc) sets it
-	// SyncFunc(nil) gets it
+	// SyncFunc(nil) loads it
 	// the function that is called when you call Sync on the configuration
 	SyncFunc(syncFunc) syncFunc
 
@@ -92,8 +92,8 @@ func (c *Configuration) AuthToken() string {
 func LoadConfig(Config ConfigurationInterface) {
 	// spew.Dump(Config)
 	// spew.Dump(plugins)
-	// spew.Dump(*driver)
-	sf := plugins[*driver](Config)
+	// spew.Dump(*Driver)
+	sf := plugins[*Driver](Config)
 	Config.SyncFunc(sf)
 }
 

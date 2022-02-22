@@ -13,8 +13,8 @@ import (
 )
 
 // var dsn = flag.String("mysql-dsn", "", "The mysql Data Source Name. I.e. user:password@tcp(your-amazonaws-uri.com:3306)/dbname")
-var httpSource = flag.String("http-ds", "", "The HTTP source to get and save the config from")
-var httpToken = flag.String("http-auth", "", "The HTTP Authorization: Bearer Token Header")
+var httpSource = flag.String("gcm-http-ds", "", "The HTTP source to get and save the config from")
+var httpToken = flag.String("gcm-http-auth", "", "The HTTP Authorization: Bearer Token Header")
 
 func init() {
 	addPlugin("http", loadHTTP)

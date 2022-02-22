@@ -10,7 +10,8 @@ import (
 type plugin func(Config ConfigurationInterface) syncFunc
 type syncFunc func(Config ConfigurationInterface) error
 
-var driver = flag.String("apiconfig-driver", "jsonc", "The apiconfig source to use")
+// Driver is the current driver used to store the configs
+var Driver = flag.String("gcm-driver", "jsonc", "The apiconfig source to use")
 
 var plugins map[string]plugin
 var pluginsInitialized = false

@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-var dsn = flag.String("mysql-dsn", "", "The mysql Data Source Name. I.e. user:password@tcp(your-amazonaws-uri.com:3306)/dbname")
+var dsn = flag.String("gcm-mysql-dsn", "", "The mysql Data Source Name. I.e. user:password@tcp(your-amazonaws-uri.com:3306)/dbname")
 
 func init() {
 	addPlugin("mysql", loadMySQL)
