@@ -2,6 +2,7 @@ package apiconfig
 
 import (
 	"flag"
+	"log"
 	"sync"
 )
 
@@ -122,7 +123,10 @@ func LoadConfig(Config ConfigurationInterface) {
 // Sync Writes the config to disk
 func Sync(Config ConfigurationInterface) {
 	sf := Config.SyncFunc(nil)
-	sf(Config)
+	err := sf(Config)
+	if err != nil {
+		log.Println("GCM sync error")
+	}
 }
 
 // Sync Writes the config to disk
