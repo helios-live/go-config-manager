@@ -114,6 +114,9 @@ func httpNewRequest(method string, query string, body io.Reader) (*http.Response
 
 	client := &http.Client{}
 	r, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	if r.StatusCode != 200 {
 		return r, fmt.Errorf("Request %s not successful: %s", r.Request.URL, r.Status)
 	}
