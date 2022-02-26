@@ -1,13 +1,12 @@
 package apiconfig
 
 import (
-	"flag"
 	"log"
 	"sync"
 )
 
 func init() {
-	flag.Parse()
+	// flag.Parse()
 }
 
 // ConfigFile is the file where the settings are stored
@@ -56,13 +55,11 @@ type Configuration struct {
 }
 
 // NewConfig returns a pointer to a filled new instance of Configuration
-func NewConfig(file string) *Configuration {
-	if len(file) == 0 {
-		file = ConfigFile
-	}
+func NewConfig(group, item string) *Configuration {
 	return &Configuration{
 		Mutex: &sync.Mutex{},
-		// configFile: file,
+		Group: group,
+		Item:  item,
 	}
 }
 
