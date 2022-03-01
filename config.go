@@ -143,8 +143,7 @@ func (c *Configuration) Sync() {
 	Sync(c)
 }
 
-// GetParent Writes the config to disk
-// Presumably after you've changed it but it does not do any checks
+// GetParent returns the underlying *Configuration object
 func (c *Configuration) GetParent() *Configuration {
 	return c
 }
