@@ -51,6 +51,9 @@ type Configuration struct {
 	// for MySql it'll be the table name
 	Item string
 
+	// Driver if set overrides the default driver used by gcm
+	Driver string
+
 	syncFunc SyncFuncDef
 }
 
@@ -91,7 +94,15 @@ func LoadConfig(Config ConfigurationInterface) {
 	// spew.Dump(Config)
 	// spew.Dump(plugins)
 	// spew.Dump(*Driver)
-	sf := plugins[*Driver](Config)
+	var sf SyncFuncDef
+
+	// if we have a driver override use that driver
+	drv := Config.GetParent().Driver
+	if len(drv) > 0 {
+		sf = plugins[drv](Config)
+	} else { // else use the default driver
+		sf = plugins[*Driver](Config)
+	}
 	Config.SyncFunc(sf)
 }
 
