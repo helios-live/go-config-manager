@@ -1,2 +1,1 @@
-# apiconfig
-# go-config-manager
+# config
