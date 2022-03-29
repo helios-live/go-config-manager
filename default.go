@@ -49,6 +49,6 @@ func (c DefaultManager) Load(data interface{}) error {
 }
 
 // Save .
-func (c DefaultManager) Save(config interfaces.Manager, data interface{}) error {
+func (c DefaultManager) Save(data interface{}) error {
 	return c.Repository().Save(c, data)
 }
