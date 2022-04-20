@@ -37,7 +37,7 @@ func (h HTTP) Load(cfg interfaces.Manager, data interface{}) error {
 		return err
 	}
 
-	err = cfg.Marshaler().Unmarshal(bytes, &cfg)
+	err = cfg.Marshaler().Unmarshal(bytes, &data)
 	if err != nil {
 		return err
 	}
