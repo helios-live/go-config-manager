@@ -21,6 +21,11 @@ type DefaultManager struct {
 	Marsh interfaces.Marshaler `json:"-" yaml:"-"`
 
 	Log log.Logger `json:"-" yaml:"-"`
+
+	// should we check the path extension and determine the appropriate
+	// marshaller?
+	// Default: true
+	AutoDetectMarshaller bool `json:"-" yaml:"-"`
 }
 
 // Repository returns the repository
