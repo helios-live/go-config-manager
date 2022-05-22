@@ -48,3 +48,8 @@ func (r File) Save(cfg interfaces.Manager, data interface{}) error {
 
 	return nil
 }
+
+// Erase .
+func (r File) Erase(cfg interfaces.Manager) error {
+	return os.Remove(cfg.Path())
+}

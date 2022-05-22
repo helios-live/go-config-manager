@@ -45,6 +45,32 @@ func (h HTTP) Load(cfg interfaces.Manager, data interface{}) error {
 	return nil
 }
 
+// Erase .
+func (h HTTP) Erase(cfg interfaces.Manager) error {
+	resp, err := h.httpNewRequest("DELETE", h.query(cfg.Path()), nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode > 299 {
+
+		bytes, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return err
+		}
+
+		respStatus := &httpResponse{}
+		err = json.Unmarshal(bytes, &respStatus)
+		if err != nil {
+			return err
+		}
+
+		return errors.New(respStatus.Status)
+	}
+	return nil
+}
+
 // Save .
 func (h HTTP) Save(cfg interfaces.Manager, data interface{}) error {
 

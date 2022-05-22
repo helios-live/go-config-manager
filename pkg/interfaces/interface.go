@@ -34,6 +34,9 @@ type Repository interface {
 
 	// Save is called to save options
 	Save(Manager, interface{}) error
+
+	// Erase is called to delete the underlying config
+	Erase(Manager) error
 }
 
 // Marshaler is responsible for serializing and deserializing data

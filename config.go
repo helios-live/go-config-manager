@@ -89,3 +89,8 @@ func Save(config interfaces.Manager, data interface{}) error {
 func Load(config interfaces.Manager, data interface{}) error {
 	return config.Repository().Load(config, data)
 }
+
+// Erase deletes the entire config
+func Erase(config interfaces.Manager) error {
+	return config.Repository().Erase(config)
+}
