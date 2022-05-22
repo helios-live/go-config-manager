@@ -11,6 +11,7 @@ require (
 
 require (
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
+	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	golang.org/x/sys v0.0.0-20210917161153-d61c044b1678 // indirect
