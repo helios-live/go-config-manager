@@ -9,8 +9,39 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"go.ideatocode.tech/config"
+	"go.ideatocode.tech/config/pkg/repository"
 )
 
+func TestCanMock(t *testing.T) {
+	// no error
+	c1 := config.New("file:./if/it/quacks", func(dm *config.DefaultManager) {
+		dm.Repo = repository.Mock{}
+	})
+
+	var x interface{}
+
+	err := config.Load(c1, &x)
+	assert.NoError(t, err)
+
+	err = config.Save(c1, &x)
+	assert.NoError(t, err)
+
+	// error
+	c2 := config.New("file:./and/walks/like/a", func(dm *config.DefaultManager) {
+		dm.Repo = repository.Mock{
+			ReturnError: true,
+		}
+	})
+
+	err = config.Load(c2, &x)
+
+	assert.Error(t, err)
+
+	err = config.Save(c2, &x)
+
+	assert.Error(t, err)
+
+}
 func TestCanLoadFile(t *testing.T) {
 	c1 := config.New("file:./examples/options/data/config.jsonc")
 
