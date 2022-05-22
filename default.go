@@ -11,8 +11,11 @@ import (
 type DefaultManager struct {
 	*sync.Mutex
 
-	// Path represents the path to the config file
+	// FilePath represents the path to the config file
 	FilePath string `json:"-" yaml:"-"`
+
+	// fullURL represents the full url passed to config.New
+	fullURL string `json:"-" yaml:"-"`
 
 	// Repo is responsible for interracting with the storage medium
 	Repo interfaces.Repository `json:"-" yaml:"-"`
@@ -56,4 +59,9 @@ func (c DefaultManager) Load(data interface{}) error {
 // Save .
 func (c DefaultManager) Save(data interface{}) error {
 	return c.Repository().Save(c, data)
+}
+
+// FullURL returns the full url passed to config.New
+func (c DefaultManager) FullURL() string {
+	return c.fullURL
 }

@@ -20,7 +20,8 @@ func New(path string, options ...func(*DefaultManager)) *DefaultManager {
 		FilePath:             path,
 		AutoDetectMarshaller: true,
 	}
-	cfg.FilePath = path
+
+	cfg.fullURL = path
 
 	rd := &RepositoryDefinition{}
 	err := rd.UnmarshalText(path)
@@ -28,6 +29,7 @@ func New(path string, options ...func(*DefaultManager)) *DefaultManager {
 		switch rd.url.Scheme {
 		case "file":
 			cfg.Repo = repository.File{}
+			cfg.FilePath = rd.url.Path
 		case "http", "https":
 
 			// strip user:pass from the url
@@ -41,6 +43,7 @@ func New(path string, options ...func(*DefaultManager)) *DefaultManager {
 				URL:   stripped,
 				Token: rd.url.User.Username() + pwd,
 			}
+			cfg.FilePath = rd.url.Path
 		}
 	}
 
